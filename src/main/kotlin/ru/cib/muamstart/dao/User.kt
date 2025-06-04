@@ -1,11 +1,12 @@
 package ru.cib.muamstart.dao
 
+import java.time.LocalDateTime
+
 data class User(
-    var id: String? = null,
-    var username: String? = null,
-    var password: String? = null,
-    var email: String? = null,
-    var firstName: String? = null,
-    var lastName: String? = null,
-    var walletCurrency: Int? = null,
+    val userId: Int = 0,
+    val email: String,
+    val passwordHash: String,
+    val fullName: String,
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val isSeller: Boolean = false
 )

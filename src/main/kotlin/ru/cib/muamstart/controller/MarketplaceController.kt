@@ -23,11 +23,11 @@ class MarketplaceController(
         return result
     }
 
-    @GetMapping("/getUserByLogin={login}")
-    fun getUserByLogin(@PathVariable login: String): User {
-      val result = userService.getUserByLogin(login)
-      return result
-    }
+//    @GetMapping("/getUserByLogin={login}")
+//    fun getUserByLogin(@PathVariable login: String): User {
+//      val result = userService.getUserByLogin(login)
+//      return result
+//    }
 
 
 

@@ -1,24 +1,16 @@
 package ru.cib.muamstart.service
 
-import com.github.javafaker.Faker
+import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.core.queryForList
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 import ru.cib.muamstart.dao.Product
+import ru.cib.muamstart.rowmappers.ProductRowMapper
 
 @Service
 class ProductService(
+    private val jdbcTemplate: JdbcTemplate,
     private val restTemplate: RestTemplate,
 ) {
-
-    fun getAllListOfProducts(): MutableList<Product> {
-        return mutableListOf(
-            Product().apply {
-                id = 0
-                name = Faker.instance().funnyName().name()
-                description = Faker.instance().chuckNorris().fact()
-                price = 0.0
-                quantity = 0
-        })
-    }
-
+    fun getAllListOfProducts(): List<Product> = jdbcTemplate.query("select * from products", ProductRowMapper())
 }
