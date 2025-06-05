@@ -1,16 +1,18 @@
 package ru.cib.muamstart.service
 
-import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.jdbc.core.queryForList
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
+import ru.cib.muamstart.dao.Category
 import ru.cib.muamstart.dao.Product
-import ru.cib.muamstart.rowmappers.ProductRowMapper
+import ru.cib.muamstart.repository.CategoryRepository
+import ru.cib.muamstart.repository.ProductRepository
 
 @Service
 class ProductService(
-    private val jdbcTemplate: JdbcTemplate,
     private val restTemplate: RestTemplate,
+    private val categoryRepository: CategoryRepository,
+    private val productRepository: ProductRepository
 ) {
-    fun getAllListOfProducts(): List<Product> = jdbcTemplate.query("select * from products", ProductRowMapper())
+    fun getAllListOfProducts(): List<Product> = productRepository.findAll()
+    fun getAllListOfCategories(): List<Category> = categoryRepository.findAll()
 }

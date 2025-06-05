@@ -1,12 +1,11 @@
 package ru.cib.muamstart.controller
 
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 import ru.cib.muamstart.dao.Product
-import ru.cib.muamstart.dao.User
 import ru.cib.muamstart.service.ProductService
 import ru.cib.muamstart.service.UserService
+import java.util.UUID
 
 @RestController
 class MarketplaceController(
@@ -15,7 +14,7 @@ class MarketplaceController(
 ) {
 
     @GetMapping("/api")
-    fun getApiVersion() = "1.0"
+    fun getApiVersion() = UUID.randomUUID().toString()
 
     @GetMapping("/products")
     fun getAllProducts(): List<Product> {

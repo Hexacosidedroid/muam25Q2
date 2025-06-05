@@ -2,7 +2,6 @@ package ru.cib.muamstart.service
 
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Service
-import ru.cib.muamstart.dao.User
 import java.util.UUID
 
 @Service
