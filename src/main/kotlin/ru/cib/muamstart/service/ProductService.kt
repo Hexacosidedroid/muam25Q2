@@ -9,10 +9,11 @@ import ru.cib.muamstart.repository.ProductRepository
 
 @Service
 class ProductService(
-    private val restTemplate: RestTemplate,
     private val categoryRepository: CategoryRepository,
     private val productRepository: ProductRepository
 ) {
     fun getAllListOfProducts(): List<Product> = productRepository.findAll()
+    fun getAllListOfProductsV2(id: Long): List<Product> = productRepository.findAllById(listOf(id))
+
     fun getAllListOfCategories(): List<Category> = categoryRepository.findAll()
 }
