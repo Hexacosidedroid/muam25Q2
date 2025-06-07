@@ -32,6 +32,14 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
@@ -95,7 +103,7 @@
                     </from>
                     <to>
                         <!-- Целевой Docker образ -->
-                        <image> hexacosidedroid/muam-2025-q2:4</image>
+                        <image> hexacosidedroid/muam-2025-q2:5</image>
                     </to>
                     <container>
                         <!-- Параметры контейнера -->
