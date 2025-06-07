@@ -1,4 +1,7 @@
-FROM ubuntu:latest
-LABEL authors="slava_ivanov_saikyo"
+FROM bellsoft/liberica-openjdk-debian:21
 
-ENTRYPOINT ["top", "-b"]
+ADD "./target/muam-start-0.0.1.jar" "/opt/app.jar"
+ADD "./entrypoint.sh" "/opt/entrypoint.sh"
+WORKDIR /opt
+RUN chmod 755 ./entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
