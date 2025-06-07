@@ -85,6 +85,33 @@
         <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <from>
+                        <!-- Базовый образ -->
+                        <image>bellsoft/liberica-openjdk-debian:21</image>
+                    </from>
+                    <to>
+                        <!-- Целевой Docker образ -->
+                        <image> hexacosidedroid/muam-2025-q2:4</image>
+                    </to>
+                    <container>
+                        <!-- Параметры контейнера -->
+                        <jvmFlags>
+                            <jvmFlag>-Xms512m</jvmFlag>
+                            <jvmFlag>-Xmx2048m</jvmFlag>
+                        </jvmFlags>
+                        <ports>
+                            <port>8080</port> <!-- Порт Spring Boot -->
+                        </ports>
+                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                        <format>Docker</format>
+                    </container>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>

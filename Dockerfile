@@ -1,3 +1,4 @@
+#Depricated
 FROM bellsoft/liberica-openjdk-debian:21
 
 ADD "./target/muam-start-0.0.1.jar" "/opt/app.jar"

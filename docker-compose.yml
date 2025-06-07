@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   muam-service:
-    image: hexacosidedroid/muam-2025-q2:3
+    image: hexacosidedroid/muam-2025-q2:4
     container_name: java
     ports:
       - "8080:8080"
