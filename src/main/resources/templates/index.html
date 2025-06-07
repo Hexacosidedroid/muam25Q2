@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Главная</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<h1>Добро пожаловать!</h1>
+<p>Это маркетплейс</p>
+
+<!-- Форма для перехода на страницу приветствия -->
+<form action="/products" method="get">
+    <button type="submit">Продукты</button>
+</form>
+</body>
+</html>

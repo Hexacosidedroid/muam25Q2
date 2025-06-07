@@ -1,5 +1,5 @@
 BEGIN TRANSACTION;
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
                        user_id SERIAL PRIMARY KEY,
                        email VARCHAR(255) UNIQUE NOT NULL,
                        password_hash VARCHAR(255) NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE users (
                        is_seller BOOLEAN NOT NULL DEFAULT FALSE
 );
 -- Продавцы (расширение пользователей)
-CREATE TABLE sellers (
+CREATE TABLE IF NOT EXISTS sellers (
                          seller_id SERIAL PRIMARY KEY,
                          user_id INT NOT NULL UNIQUE REFERENCES users(user_id) ON DELETE CASCADE,
                          company_name VARCHAR(100),
@@ -16,13 +16,13 @@ CREATE TABLE sellers (
                          bank_details TEXT
 );
 -- Категории товаров
-CREATE TABLE categories (
+CREATE TABLE IF NOT EXISTS categories (
                             category_id SERIAL PRIMARY KEY,
                             name VARCHAR(50) NOT NULL UNIQUE,
                             parent_id INT REFERENCES categories(category_id) ON DELETE SET NULL
 );
 -- Товары
-CREATE TABLE products (
+CREATE TABLE IF NOT EXISTS products (
                           product_id SERIAL PRIMARY KEY,
                           seller_id INT NOT NULL REFERENCES sellers(seller_id) ON DELETE CASCADE,
                           category_id INT NOT NULL REFERENCES categories(category_id) ON DELETE RESTRICT,
@@ -34,7 +34,7 @@ CREATE TABLE products (
                           is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
 -- Заказы
-CREATE TABLE orders (
+CREATE TABLE IF NOT EXISTS orders (
                         order_id SERIAL PRIMARY KEY,
                         user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
                         status VARCHAR(20) NOT NULL DEFAULT 'PENDING' CHECK (
@@ -45,7 +45,7 @@ CREATE TABLE orders (
                         updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 -- Элементы заказа
-CREATE TABLE order_items (
+CREATE TABLE IF NOT EXISTS order_items (
                              order_item_id SERIAL PRIMARY KEY,
                              order_id INT NOT NULL REFERENCES orders(order_id) ON DELETE CASCADE,
                              product_id INT NOT NULL REFERENCES products(product_id) ON DELETE RESTRICT,
@@ -53,7 +53,7 @@ CREATE TABLE order_items (
                              price NUMERIC(10,2) NOT NULL CHECK (price > 0)
 );
 -- Отзывы
-CREATE TABLE reviews (
+CREATE TABLE IF NOT EXISTS reviews (
                          review_id SERIAL PRIMARY KEY,
                          product_id INT NOT NULL REFERENCES products(product_id) ON DELETE CASCADE,
                          user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
@@ -63,7 +63,7 @@ CREATE TABLE reviews (
                          UNIQUE(product_id, user_id)
 );
 -- Платежи
-CREATE TABLE payments (
+CREATE TABLE IF NOT EXISTS payments (
                           payment_id SERIAL PRIMARY KEY,
                           order_id INT NOT NULL UNIQUE REFERENCES orders(order_id) ON DELETE CASCADE,
                           amount NUMERIC(12,2) NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE payments (
 END TRANSACTION;
 
 BEGIN TRANSACTION;
-CREATE INDEX idx_products_title ON products USING gin(to_tsvector('english', title));
-CREATE INDEX idx_orders_user ON orders(user_id);
-CREATE INDEX idx_reviews_product ON reviews(product_id);
+CREATE INDEX IF NOT EXISTS idx_products_title ON products USING gin(to_tsvector('english', title));
+CREATE INDEX IF NOT EXISTS idx_orders_user ON orders(user_id);
+CREATE INDEX IF NOT EXISTS idx_reviews_product ON reviews(product_id);
 END TRANSACTION;

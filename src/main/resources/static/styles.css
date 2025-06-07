@@ -1,0 +1,137 @@
+/* src/main/resources/static/styles.css */
+:root {
+    --neon-pink: #ff00ff;
+    --neon-blue: #00ffff;
+    --neon-green: #39ff14;
+    --neon-purple: #bd00ff;
+    --dark-bg: #0a0a0a;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: #e0e0e0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, p {
+    color: white;
+    text-align: center;
+    text-shadow:
+            0 0 5px var(--neon-blue),
+            0 0 10px var(--neon-blue);
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+}
+
+a {
+    color: var(--neon-green);
+    text-decoration: none;
+    transition: text-shadow 0.3s;
+}
+
+a:hover {
+    text-shadow:
+            0 0 5px var(--neon-green),
+            0 0 15px var(--neon-green);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 3rem auto;
+    padding: 2rem;
+    max-width: 400px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 4px;
+    background: rgba(10, 20, 30, 0.5);
+    box-shadow:
+            0 0 10px rgba(0, 255, 255, 0.1),
+            inset 0 0 10px rgba(0, 255, 255, 0.05);
+}
+
+label {
+    color: var(--neon-pink);
+    font-weight: 500;
+}
+
+input[type="text"] {
+    background: transparent;
+    border: 1px solid var(--neon-purple);
+    border-radius: 2px;
+    padding: 0.8rem;
+    color: white;
+    font-size: 1rem;
+    transition: box-shadow 0.3s;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow:
+            0 0 8px var(--neon-purple),
+            0 0 12px rgba(189, 0, 255, 0.4);
+}
+
+button {
+    background: transparent;
+    color: var(--neon-blue);
+    border: 1px solid var(--neon-blue);
+    border-radius: 2px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition:
+            background 0.3s,
+            text-shadow 0.3s,
+            box-shadow 0.3s;
+}
+
+button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    text-shadow: 0 0 8px var(--neon-blue);
+    box-shadow:
+            0 0 10px var(--neon-blue),
+            0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.greeting-message {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 3rem 0;
+    color: var(--neon-pink);
+    text-shadow:
+            0 0 5px var(--neon-pink),
+            0 0 15px rgba(255, 0, 255, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; text-shadow: 0 0 10px var(--neon-pink), 0 0 30px rgba(255, 0, 255, 0.6); }
+    100% { opacity: 0.8; }
+}
+
+.container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Эффект неоновой сетки на заднем плане */
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+            linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: -1;
+}
